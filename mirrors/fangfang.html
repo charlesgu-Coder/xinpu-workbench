@@ -816,4 +816,41 @@ openImg=function(el){
   }
 };
 </script>
+<style id="mm-mobile-adapt">
+#mmBack{display:none}
+@media (max-width:760px){
+  .rail{display:none!important}
+  #app{max-width:none;box-shadow:none;width:100%}
+  #list{width:100%;min-width:0;flex:none;border-right:0}
+  #ctcside{width:100%;min-width:0}
+  #chat{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;width:100%;height:100%}
+  body.mm-inchat #chat{display:flex}
+  body.mm-inchat #list,body.mm-inchat #ctcside{display:none}
+  #mmBack{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex:none;background:transparent;border:0;color:#333;font-size:30px;line-height:1;cursor:pointer;padding:0;margin-right:2px}
+  #hd{padding:0 8px 0 4px}
+  .cv .nm{white-space:normal;word-break:break-word}
+  .cv .pv{white-space:normal}
+  #msgs{padding:12px 14px 24px}
+  .bwrap{max-width:82%}
+  .inputbar{padding:6px 8px}
+  .gsearch{padding:0}
+  .gsearch .gbox{width:100%;height:100%;border-radius:0;max-width:none}
+  #wxcard .wc-box{width:min(92vw,340px)!important}
+}
+</style>
+<script>
+(function(){
+  if(window.__mmAdapt)return;window.__mmAdapt=true;
+  var conv=document.getElementById("conv"),ctc=document.getElementById("ctcside");
+  if(conv)conv.addEventListener("click",function(e){if(e.target.closest(".cv"))document.body.classList.add("mm-inchat");},true);
+  if(ctc)ctc.addEventListener("click",function(e){if(e.target.closest(".ctcrow"))document.body.classList.add("mm-inchat");},true);
+  var hd=document.getElementById("hd");
+  if(hd){
+    var b=document.createElement("button");
+    b.type="button";b.id="mmBack";b.setAttribute("aria-label","返回会话列表");b.textContent="\u2039";
+    b.addEventListener("click",function(){document.body.classList.remove("mm-inchat");});
+    hd.insertBefore(b,hd.firstChild);
+  }
+})();
+</script>
 </body></html>
